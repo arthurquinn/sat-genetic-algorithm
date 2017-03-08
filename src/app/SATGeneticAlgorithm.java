@@ -20,63 +20,83 @@ public class SATGeneticAlgorithm {
 	
 	public void runAlgorithm() {
 		
-		List<Integer[]> clauses = clauseList.getClauses();
-		
-		// Step 0: Perform the evaluation function for each chromosome in the population
-		
-		
+		int iters = 0;
+		boolean improved = true;
 		int evalSum = 0;
 		int[] evalValues = new int[population.length];
-		for (int i = 0; i < population.length; i++) {
-			evalValues[i] = population[i].performEvaluationFunction(clauseList);
-			evalSum += evalValues[i];
-			System.out.println(evalValues[i]);
+		
+		while (improved) {
+			// Step 0: Perform the evaluation function for each chromosome in the population
+			
+			System.out.println("BEGIN ITERATION: " + iters);
+			
+			if (iters == 0) {
+				for (int i = 0; i < population.length; i++) {
+					evalValues[i] = population[i].performEvaluationFunction(clauseList);
+					evalSum += evalValues[i];
+					System.out.println(evalValues[i]);
+				}
+			}
+			// int[] evalValues = Arrays.stream(population).mapToInt(c -> c.performEvaluationFunction(clauseList)).toArray();
+			
+			
+			// Step 1: Get two elite chromosomes from the population
+			int eliteIdxs[] = evaluateElite(evalValues);
+			
+			System.out.println(eliteIdxs[0]);
+			System.out.println(eliteIdxs[1]);
+			
+			
+			
+			
+			// Step 2: Probabalistically select the most fit chromosomes in the population for reproduction (elite automatically pass to step 3)
+			
+			// double[] evalProb = Arrays.stream(evalValues).mapToDouble(i -> (double)i / (double)evalSum).toArray();
+			
+			// evaluate their probabilities
+			double[] evalProbUpperBounds = new double[population.length];
+			evalProbUpperBounds[0] = (double)evalValues[0] / (double)evalSum;
+			System.out.println(evalProbUpperBounds[0]);
+			for (int i = 1; i < population.length; i++) {
+				evalProbUpperBounds[i] = evalProbUpperBounds[i - 1] + ((double)evalValues[i] / (double)evalSum);
+				System.out.println(evalProbUpperBounds[i]);
+			}
+			evalProbUpperBounds[population.length - 1] = 1.0; // set the last upper bound to be 1 to resolve precision issues
+	
+			
+			// select based on their fitness (probability of selection based on evaluation function value) (elite are guaranteed selection)
+			population = performProbabilisticSelection(evalProbUpperBounds, eliteIdxs);
+			
+			
+			// Step 3: Uniformly crossover two adjacent chromosomes (ignore elite - they continue intact)
+			performUniformCrossover(eliteIdxs);
+			
+			// Step 4: Perform disruptive mutation (ignore elite - they continue intact)
+			performDisruptiveMutation(eliteIdxs);
+			
+			// Step 5: Flip heuristic
+			performFlipHeuristic(eliteIdxs, evalValues);
+			
+			
+			// Calculate new evaluation values after this iteration completes
+			improved = false;
+			evalSum = 0;
+			for (int i = 0; i < population.length; i++) {
+				int temp = population[i].performEvaluationFunction(clauseList);
+				System.out.println("new eval function calculated: " + temp);
+				if (temp > evalValues[i])
+					improved = true;
+				if (temp == clauseList.getClauses().size()) {
+					System.out.println("Solution found!!!");
+					return;
+				}
+				evalValues[i] = temp;
+				evalSum += temp;
+			}
+			iters++;
 		}
 		
-		// int[] evalValues = Arrays.stream(population).mapToInt(c -> c.performEvaluationFunction(clauseList)).toArray();
-		
-		
-		// Step 1: Get two elite chromosomes from the population
-		int eliteIdxs[] = evaluateElite(evalValues);
-		
-		System.out.println(eliteIdxs[0]);
-		System.out.println(eliteIdxs[1]);
-		
-		
-		
-		
-		// Step 2: Probabalistically select the most fit chromosomes in the population for reproduction (elite automatically pass to step 3)
-		
-		// double[] evalProb = Arrays.stream(evalValues).mapToDouble(i -> (double)i / (double)evalSum).toArray();
-		
-		// evaluate their probabilities
-		double[] evalProbUpperBounds = new double[population.length];
-		evalProbUpperBounds[0] = (double)evalValues[0] / (double)evalSum;
-		System.out.println(evalProbUpperBounds[0]);
-		for (int i = 1; i < population.length; i++) {
-			evalProbUpperBounds[i] = evalProbUpperBounds[i - 1] + ((double)evalValues[i] / (double)evalSum);
-			System.out.println(evalProbUpperBounds[i]);
-		}
-		evalProbUpperBounds[population.length - 1] = 1.0; // set the last upper bound to be 1 to resolve precision issues
-
-		
-		// select based on their fitness (probability of selection based on evaluation function value) (elite are guaranteed selection)
-		population = performProbabilisticSelection(evalProbUpperBounds, eliteIdxs);
-		
-		
-		// Step 3: Uniformly crossover two adjacent chromosomes (ignore elite - they continue intact)
-		performUniformCrossover(eliteIdxs);
-		
-		// Step 4: Perform disruptive mutation (ignore elite - they continue intact)
-		performDisruptiveMutation(eliteIdxs);
-		
-		// Step 5: Flip heuristic
-		performFlipHeuristic(eliteIdxs, evalValues);
-		
-		
-		
-		
-		
+		System.out.println("No improvements made... terminating");
 	}
 	
 	private void performFlipHeuristic(int[] eliteIdxs, int[] startEvalVals) {
@@ -133,6 +153,7 @@ public class SATGeneticAlgorithm {
 				}	
 			} else {
 				System.out.println("Preserving elite at " + i);
+				newPop[i] = population[i];
 			}
 		}
 		return newPop;
