@@ -27,6 +27,17 @@ public class Chromosome {
 		varAssignments[idx] = val;
 	}
 	
+	
+	// Mutates the chromosome; Here mutation is defined as flipping each var assignment with probability 0.50
+	public void mutate() {
+		Random random = new Random();
+		for (int i = 0; i < varAssignments.length; i++) {
+			if (random.nextDouble() < 0.50) {
+				varAssignments[i] = !varAssignments[i];
+			}
+		}
+	}
+	
 	// Performs a uniform crossover with another chromosome; numVars must be consistent for each chromosome
 	public void uniformCrossover(Chromosome c) {
 		Random random = new Random();

@@ -67,10 +67,36 @@ public class SATGeneticAlgorithm {
 		// Step 3: Uniformly crossover two adjacent chromosomes (ignore elite - they continue intact)
 		performUniformCrossover(eliteIdxs);
 		
+		// Step 4: Perform disruptive mutation (ignore elite - they continue intact)
+		performDisruptiveMutation(eliteIdxs);
+		
+		// Step 5: Flip heuristic
+		performFlipHeuristic(eliteIdxs);
 		
 		
 		
 		
+		
+	}
+	
+	private void performFlipHeuristic(int[] eliteIdxs) {
+		for (int i = 0; i < population.length; i++) {
+			if (i != eliteIdxs[0] && i != eliteIdxs[1]) {
+				
+			}
+		}
+	}
+	
+	private void performDisruptiveMutation(int[] eliteIdxs) {
+		Random random = new Random();
+		for (int i = 0; i < population.length; i++) {
+			// A chromosome is mutated with probability 0.90
+			if (i != eliteIdxs[0] && i != eliteIdxs[1] && random.nextDouble() < 0.90) {
+				// Mutation here is defined as flipping each var assignment with probability 0.50
+				System.out.println("mutating " + i);
+				population[i].mutate();
+			}
+		}
 	}
 	
 	private void performUniformCrossover(int[] eliteIdxs) {
