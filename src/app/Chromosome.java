@@ -1,5 +1,6 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +26,47 @@ public class Chromosome {
 	
 	public void setAssignment(boolean val, int idx) {
 		varAssignments[idx] = val;
+	}
+	
+	
+	// Performs the flip heuristic operation
+	public void flipHeuristic(int evalVal, ClauseList clauseList) {
+		Random random = new Random();
+		List<Integer> idxToFlip = new ArrayList<Integer>();
+		int gain = 1;
+		
+		int flipIters = 0;
+		
+		// Continue the flip heuristic as long as the flips yielded a net gain in the evaluation function values
+		while (gain > 0) {
+			int tempVal = -1;
+			int startVal = evalVal;
+			
+			System.out.println("Performing " + flipIters++ + "th flip iteration");
+			
+			// Maintain a list of assignment indexes we have yet to flip
+			for (int i = 0; i < varAssignments.length; i++) {
+				idxToFlip.add(i);
+			}
+			for (int i = 0; i < varAssignments.length; i++) {
+				
+				// Get a random assignment index and remove it from the list
+				int idxIdx = random.nextInt(idxToFlip.size());
+				int flipIdx = idxToFlip.remove(idxIdx);
+				
+				// Flip the assignment and calculate the evaluation value after the flip
+				boolean origVal = getAssignment(flipIdx);
+				setAssignment(!origVal, flipIdx);
+				tempVal = performEvaluationFunction(clauseList);
+				
+				// If the flip results in an improvement, set the new evaluation value and keep the flip; else discard the flip
+				if (tempVal >= evalVal)
+					evalVal = tempVal;
+				else
+					setAssignment(origVal, flipIdx);
+			}
+			gain = evalVal - startVal;
+		}
 	}
 	
 	

@@ -71,7 +71,7 @@ public class SATGeneticAlgorithm {
 		performDisruptiveMutation(eliteIdxs);
 		
 		// Step 5: Flip heuristic
-		performFlipHeuristic(eliteIdxs);
+		performFlipHeuristic(eliteIdxs, evalValues);
 		
 		
 		
@@ -79,10 +79,11 @@ public class SATGeneticAlgorithm {
 		
 	}
 	
-	private void performFlipHeuristic(int[] eliteIdxs) {
+	private void performFlipHeuristic(int[] eliteIdxs, int[] startEvalVals) {
 		for (int i = 0; i < population.length; i++) {
 			if (i != eliteIdxs[0] && i != eliteIdxs[1]) {
-				
+				System.out.println("Beginning flip heuristic for " + i);
+				population[i].flipHeuristic(startEvalVals[i], clauseList);
 			}
 		}
 	}
