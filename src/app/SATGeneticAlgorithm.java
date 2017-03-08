@@ -65,11 +65,29 @@ public class SATGeneticAlgorithm {
 		
 		
 		// Step 3: Uniformly crossover two adjacent chromosomes (ignore elite - they continue intact)
+		performUniformCrossover(eliteIdxs);
 		
 		
 		
 		
 		
+	}
+	
+	private void performUniformCrossover(int[] eliteIdxs) {
+		int xIdx = 0;
+		int yIdx = 0;
+		for (int i = 0; i < (population.length / 2) - 1; i++) {
+			while (xIdx == eliteIdxs[0] || xIdx == eliteIdxs[1]) {
+				xIdx++;
+			}
+			yIdx = xIdx + 1;
+			while (yIdx == eliteIdxs[0] || yIdx == eliteIdxs[1]) {
+				yIdx++;
+			}
+			System.out.println("performing crossover on " + xIdx + " and " + yIdx);
+			population[xIdx].uniformCrossover(population[yIdx]);
+			xIdx = yIdx + 1;
+		}
 	}
 	
 	

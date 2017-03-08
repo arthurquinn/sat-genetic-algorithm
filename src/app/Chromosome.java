@@ -19,6 +19,25 @@ public class Chromosome {
 	
 	public boolean[] getVarAssignments() { return this.varAssignments; }
 	
+	public boolean getAssignment(int idx) {
+		return varAssignments[idx];
+	}
+	
+	public void setAssignment(boolean val, int idx) {
+		varAssignments[idx] = val;
+	}
+	
+	// Performs a uniform crossover with another chromosome; numVars must be consistent for each chromosome
+	public void uniformCrossover(Chromosome c) {
+		Random random = new Random();
+		for (int i = 0; i < varAssignments.length; i++) {
+			// Assign theirs to ours with 0.50 prob; Assign ours to theirs with 0.50 prob
+			if (random.nextDouble() < 0.50)
+				setAssignment(c.getAssignment(i), i);
+			else
+				c.setAssignment(getAssignment(i), i);
+		}
+	}
 	
 	
 	// Performs the evaluation function; here the evaluation function is the number of clauses satisfied by this chromosome
