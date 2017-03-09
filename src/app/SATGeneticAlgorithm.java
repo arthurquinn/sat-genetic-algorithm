@@ -5,26 +5,26 @@ import java.util.List;
 import java.util.Random;
 
 public class SATGeneticAlgorithm {
-	
-	private ClauseList clauseList;
-	
-	private Chromosome[] population;
-	
-	private Random random;
-	
-	public SATGeneticAlgorithm(ClauseList clauseList, int populationSize) {
-		this.clauseList = clauseList;
-		this.random = new Random();
-		this.population = new Chromosome[populationSize];
-		for (int i = 0; i < populationSize; i++) {
-			this.population[i] = new Chromosome(clauseList.getNumVars(), random);
-		}
-	}
-	
+
+    private ClauseList clauseList;
+
+    private Chromosome[] population;
+
+    private Random random;
+
+    public SATGeneticAlgorithm(ClauseList clauseList, int populationSize) {
+        this.clauseList = clauseList;
+        this.random = new Random();
+        this.population = new Chromosome[populationSize];
+        for (int i = 0; i < populationSize; i++) {
+            this.population[i] = new Chromosome(clauseList.getNumVars(), random);
+        }
+    }
+
     public boolean runAlgorithm() {
-    	
-    	long start = System.currentTimeMillis();
-    	
+
+        long start = System.nanoTime();
+
         // Calculate eval values
         int evalSum = 0;
         int[] eval = new int[population.length];
@@ -38,12 +38,11 @@ public class SATGeneticAlgorithm {
         double[] probUpper = new double[population.length];
         double acc = 0;
         for (int i = 0; i < population.length; i++) {
-            acc += (double)eval[i] / (double)evalSum;
+            acc += (double) eval[i] / (double) evalSum;
             probUpper[i] = acc;
             System.out.println("" + i + ": " + probUpper[i]);
         }
         probUpper[population.length - 1] = 1.0f; // set to 1 to resolve precision errors
-
 
         // Determine elite
         int[] eliteIdx = new int[2];
@@ -51,6 +50,7 @@ public class SATGeneticAlgorithm {
         int max2 = 0;
         for (int i = 0; i < population.length; i++) {
             if (eval[i] > max1) {
+                
                 // swap max1 to max2
                 max2 = max1;
                 eliteIdx[1] = eliteIdx[0];
@@ -58,8 +58,8 @@ public class SATGeneticAlgorithm {
                 // set new max 1
                 max1 = eval[i];
                 eliteIdx[0] = i;
-            }
-            else if (eval[i] > max2) {
+            } else if (eval[i] > max2) {
+                
                 // set new max 2
                 max2 = eval[i];
                 eliteIdx[1] = i;
@@ -82,7 +82,7 @@ public class SATGeneticAlgorithm {
                     }
                 }
             } else {
-            	System.out.println("Preserving elite at " + i);
+                System.out.println("Preserving elite at " + i);
                 newPop[i] = population[i];
             }
         }
@@ -104,7 +104,6 @@ public class SATGeneticAlgorithm {
             xIdx = yIdx + 1;
         }
 
-
         // Disruptive mutation
         for (int i = 0; i < population.length; i++) {
             // mutate non-elite with prob 0.90
@@ -114,8 +113,7 @@ public class SATGeneticAlgorithm {
             }
         }
 
-
-        //Flip heuristic
+        // Flip heuristic
         for (int i = 0; i < population.length; i++) {
             if (i != eliteIdx[0] && i != eliteIdx[1]) {
                 population[i].flipHeuristic(population[i].calcEvaluationValue(clauseList), clauseList, random);
@@ -123,18 +121,16 @@ public class SATGeneticAlgorithm {
             }
         }
 
-        
         // final eval values
-        evalSum = 0;
-        eval = new int[population.length];
-        for (int i = 0; i < population.length; i++) {
-            eval[i] = population[i].calcEvaluationValue(clauseList);
-            evalSum += eval[i];
-            System.out.println("" + i + ": " + eval[i]);
-        }
+//        evalSum = 0;
+//        eval = new int[population.length];
+//        for (int i = 0; i < population.length; i++) {
+//            eval[i] = population[i].calcEvaluationValue(clauseList);
+//            evalSum += eval[i];
+//            System.out.println("" + i + ": " + eval[i]);
+//        }
 
-        
-        System.out.println("time: " + (System.currentTimeMillis() - start));
+        System.out.println("time: " + ((System.nanoTime() - start) / 1000000.0) + "ms");
 
         return false;
     }
