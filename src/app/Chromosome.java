@@ -5,31 +5,33 @@ import java.util.List;
 import java.util.Random;
 
 public class Chromosome {
-		
-	private boolean[] values;
 
-	public Chromosome(int numVars, Random random) {
-		this.values = new boolean[numVars];
-		for (int i = 0; i < numVars; i++) { 
-			if (random.nextFloat() >= 0.50)
-				this.values[i] = true;
-		}
-	}
-	
-	public Chromosome(Chromosome c) {
-		values = new boolean[c.getValues().length];
-		for (int i = 0; i < c.getValues().length; i++) {
-			this.values[i] = c.getValues()[i];
-		}
-	}
-	
-	public boolean[] getValues() { return this.values; }
-	
+    private boolean[] values;
+
+    public Chromosome(int numVars, Random random) {
+        this.values = new boolean[numVars];
+        for (int i = 0; i < numVars; i++) {
+            if (random.nextFloat() >= 0.50)
+                this.values[i] = true;
+        }
+    }
+
+    public Chromosome(Chromosome c) {
+        values = new boolean[c.getValues().length];
+        for (int i = 0; i < c.getValues().length; i++) {
+            this.values[i] = c.getValues()[i];
+        }
+    }
+
+    public boolean[] getValues() {
+        return this.values;
+    }
+
     public int calcEvaluationValue(ClauseList clauseList) {
         int f = 0;
         List<Integer[]> cl = clauseList.getClauses();
         for (int i = 0; i < cl.size(); i++) {
-            for (int j = 0; j < 3; j++) { 
+            for (int j = 0; j < 3; j++) {
                 boolean val = values[Math.abs(cl.get(i)[j]) - 1];
                 if (cl.get(i)[j] < 0)
                     val = !val;
@@ -58,7 +60,8 @@ public class Chromosome {
                 values[i] = !values[i];
     }
 
-    public void flipHeuristic(int initEval, ClauseList clauseList, Random random) {
+    public int flipHeuristic(int initEval, ClauseList clauseList, Random random) {
+        int numFlipped = 0;
         int gain = 1;
         int startEval = initEval;
         int currEval = initEval;
@@ -69,7 +72,7 @@ public class Chromosome {
             for (int i = 0; i < values.length; i++) {
                 remainIdx.add(i);
             }
-            
+
             for (int i = 0; i < values.length; i++) {
                 // Get random index
                 int idx = remainIdx.remove(random.nextInt(remainIdx.size()));
@@ -78,15 +81,19 @@ public class Chromosome {
                 values[idx] = !values[idx];
                 int eval = calcEvaluationValue(clauseList);
 
-                // If flip netted us a gain, update current eval and accept flip; else reject flip
-                if (eval >= currEval)
+                // If flip netted us a gain, update current eval and accept
+                // flip; else reject flip
+                if (eval >= currEval) {
                     currEval = eval;
+                    numFlipped++;
+                }
                 else
                     values[idx] = !values[idx];
             }
 
             // Check if all flips netted us a gain
-            gain = currEval - startEval; 
+            gain = currEval - startEval;
         }
+        return numFlipped;
     }
 }

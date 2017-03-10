@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class SATGeneticAlgorithm {
 
-    private final int ALOTTED_TIME = 5000;
+    private final int ALOTTED_TIME = 1000;
 
     private ClauseList clauseList;
 
@@ -26,28 +26,35 @@ public class SATGeneticAlgorithm {
         }
     }
 
-    public boolean runAlgorithm() {
+    public AlgorithmResult runAlgorithm() {
         
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("time up");
                 timeExpired = true;
+                timer.cancel();
+                timer.purge();
             }
           }, ALOTTED_TIME);
         
-        
+        int totalFlipped = 0;
         long start = System.nanoTime();
 
         while (!timeExpired) {
             // Calculate eval values
+            
             int evalSum = 0;
             int[] eval = new int[population.length];
             for (int i = 0; i < population.length; i++) {
                 eval[i] = population[i].calcEvaluationValue(clauseList);
                 
                 if (eval[i] == clauseList.getClauses().size()) {
-                    return true;
+                    timer.cancel();
+                    timer.purge();
+                    // Create successful result and return
+                    return new AlgorithmResult(true, (System.nanoTime() - start) / 1000000.0, totalFlipped);
                 }
                 
                 evalSum += eval[i];
@@ -136,14 +143,13 @@ public class SATGeneticAlgorithm {
             // Flip heuristic
             for (int i = 0; i < population.length; i++) {
                 if (i != eliteIdx[0] && i != eliteIdx[1]) {
-                    population[i].flipHeuristic(population[i].calcEvaluationValue(clauseList), clauseList, random);
+                    totalFlipped += population[i].flipHeuristic(population[i].calcEvaluationValue(clauseList), clauseList, random);
                     //System.out.println("Flipping " + i);
                 }
             }
-        }   
+        }
         
-        
-        System.out.println("time: " + ((System.nanoTime() - start) / 1000000.0) + "ms");
-        return false;
+        // System.out.println("time: " + ((System.nanoTime() - start) / 1000000.0) + "ms");
+        return new AlgorithmResult(false, (System.nanoTime() - start) / 1000000.0, totalFlipped);
     }
 }
