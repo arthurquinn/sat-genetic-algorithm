@@ -8,7 +8,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
@@ -17,34 +16,44 @@ import app.AlgorithmResult;
 
 public class BarChart extends ApplicationFrame{
     
-    public BarChart(String title, List<AlgorithmResult>[] resultArray, String[] colKeys) {
+    private String title;
+    
+    private List<AlgorithmResult[]>[] data;
+    
+    public BarChart(String title, List<AlgorithmResult[]>[] resultArray) {
         super(title);
-        
+       
+        this.title = title;
+        this.data = resultArray;
+    }
+    
+    public void createSuccessChart(String title, String[] colKeys, String[] rowKeys) {
+        setTitle(title);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
-        for (int i = 0; i < resultArray.length; i++) {
-            int succTotal = 0;
-            double bitflipTotal = 0;
+        
+        // For each different file
+        for (int i = 0; i < data.length; i++) {
             
-            List<Double> runtimes = new ArrayList<Double>();
+            int[] succCount = new int[3];
             
-            double count = (double)resultArray[i].size();
-            
-            // Calculate the average success/runtime/bitflips
-            for (int j = 0; j < count; j++) {
-                succTotal = resultArray[i].get(j).getSuccess() ? succTotal + 1 : succTotal;
-                runtimes.add(resultArray[i].get(j).getRunningTimeMs());
-                bitflipTotal += resultArray[i].get(j).getTotalBitflips();
+            // For each set of algorithm results
+            for (int j = 0; j < data[i].size(); j++) {
+                
+                // For each different time data in algorithm result array
+                for (int k = 0; k < data[i].get(j).length; k++) {
+                    succCount[k] = data[i].get(j)[k].getSuccess() ? succCount[k] + 1 : succCount[k];
+                }
             }
             
-            Collections.sort(runtimes);
-            double succAvg = (double)succTotal / count;
-            double timeMedian = runtimes.get(runtimes.size() / 2);
-            double bitflipAvg = (double)bitflipTotal / count;
+            double[] succAvg = new double[3];
             
-            dataset.addValue(succAvg, colKeys[i], "% Success");
-            // dataset.addValue(timeMedian, "Median Runtime(ms)", colKeys[i]);
-            // dataset.addValue(bitflipAvg, "Average Bit Flips", colKeys[i]);
+            // Calculate average for each count
+            for (int j = 0; j < succCount.length; j++) {
+                succAvg[j] = (double)succCount[j] / (double)data[i].size();
+                
+                dataset.addValue(succAvg[j], rowKeys[j], colKeys[i]);
+            }
         }
         
         JFreeChart chart = ChartFactory.createBarChart(
@@ -62,15 +71,98 @@ public class BarChart extends ApplicationFrame{
         pack();
         RefineryUtilities.centerFrameOnScreen(this);
         setVisible(true);
-        
     }
     
-    private void createDataset(List<AlgorithmResult> results) {
+    public void createMedianTimeChart(String title, String[] colKeys, String[] rowKeys) {
+        setTitle(title);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         
+        // For each different file
+        for (int i = 0; i < data.length; i++) {
+            
+            List<Double>[] elapsedTimes = new List[3];
+            elapsedTimes[0] = new ArrayList<Double>();
+            elapsedTimes[1] = new ArrayList<Double>();
+            elapsedTimes[2] = new ArrayList<Double>();
+            
+            // For each set of algorithm results
+            for (int j = 0; j < data[i].size(); j++) {
+                
+                // For each different time data in algorithm result array
+                for (int k = 0; k < data[i].get(j).length; k++) {
+                    elapsedTimes[k].add(data[i].get(j)[k].getRunningTimeMs());
+                }
+            }
+            
+            // Calculate average for each count
+            for (int j = 0; j < elapsedTimes.length; j++) {
+
+                Collections.sort(elapsedTimes[j]);
+                double medianTime = elapsedTimes[j].get(elapsedTimes[j].size() / 2);
+                dataset.addValue(medianTime, rowKeys[j], colKeys[i]);
+            }
+        }
+        
+        JFreeChart chart = ChartFactory.createBarChart(
+                title, 
+                "Variable Number", 
+                "Median Elapsed Time(ms)", 
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        setContentPane(chartPanel);
+        
+        pack();
+        RefineryUtilities.centerFrameOnScreen(this);
+        setVisible(true);
+    }
+    
+    public void createBitflipChart(String title, String[] colKeys, String[] rowKeys) {
+        setTitle(title);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         
+        // For each different file
+        for (int i = 0; i < data.length; i++) {
+            
+            int[] totalBitflip = new int[3];
+            
+            // For each set of algorithm results
+            for (int j = 0; j < data[i].size(); j++) {
+                
+                // For each different time data in algorithm result array
+                for (int k = 0; k < data[i].get(j).length; k++) {
+                    totalBitflip[k] += data[i].get(j)[k].getTotalBitflips();
+                }
+            }
+            
+            // Calculate average for each count
+            for (int j = 0; j < totalBitflip.length; j++) {
+
+                double avgBitflip = (double)totalBitflip[j] / (double)data[i].size();
+                dataset.addValue(avgBitflip, rowKeys[j], colKeys[i]);
+            }
+        }
+        
+        JFreeChart chart = ChartFactory.createBarChart(
+                title, 
+                "Variable Number", 
+                "Average Number of Bit Flips", 
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        setContentPane(chartPanel);
+        
+        pack();
+        RefineryUtilities.centerFrameOnScreen(this);
+        setVisible(true);
         
     }
-
 }

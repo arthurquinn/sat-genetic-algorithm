@@ -16,10 +16,10 @@ public class AIProject2 {
 
         ClauseList cl = new ClauseList();
         
-        List<AlgorithmResult> results20 = new ArrayList<AlgorithmResult>();
-        List<AlgorithmResult> results50 = new ArrayList<AlgorithmResult>();
-        List<AlgorithmResult> results75 = new ArrayList<AlgorithmResult>();
-        List<AlgorithmResult> results100 = new ArrayList<AlgorithmResult>();
+        List<AlgorithmResult[]> results20 = new ArrayList<AlgorithmResult[]>();
+        List<AlgorithmResult[]> results50 = new ArrayList<AlgorithmResult[]>();
+        List<AlgorithmResult[]> results75 = new ArrayList<AlgorithmResult[]>();
+        List<AlgorithmResult[]> results100 = new ArrayList<AlgorithmResult[]>();
         
         try {
 
@@ -29,8 +29,13 @@ public class AIProject2 {
             File[] files = (new File("uf100")).listFiles();
             for (int i = 0; i < 100; i++) {
                 cl.loadCNFFile(files[i].getPath());
-                results100.add(new SATGeneticAlgorithm(cl, POPULATION_SIZE).runAlgorithm());
                 
+                AlgorithmResult[] arr = new AlgorithmResult[3];
+                arr[0] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 250).runAlgorithm();
+                arr[1] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 500).runAlgorithm();
+                arr[2] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 750).runAlgorithm();
+                
+                results100.add(arr);
                 System.out.println("uf100-" + i + " complete..");
             }
             
@@ -38,8 +43,13 @@ public class AIProject2 {
             files = (new File("uf75")).listFiles();
             for (int i = 0; i < 100; i++) {
                 cl.loadCNFFile(files[i].getPath());
-                results75.add(new SATGeneticAlgorithm(cl, POPULATION_SIZE).runAlgorithm());
+
+                AlgorithmResult[] arr = new AlgorithmResult[3];
+                arr[0] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 250).runAlgorithm();
+                arr[1] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 500).runAlgorithm();
+                arr[2] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 750).runAlgorithm();
                 
+                results75.add(arr);
                 System.out.println("uf75-" + i + " complete..");
             }
             
@@ -47,8 +57,13 @@ public class AIProject2 {
             files = (new File("uf50")).listFiles();
             for (int i = 0; i < 100; i++) {
                 cl.loadCNFFile(files[i].getPath());
-                results50.add(new SATGeneticAlgorithm(cl, POPULATION_SIZE).runAlgorithm());
+
+                AlgorithmResult[] arr = new AlgorithmResult[3];
+                arr[0] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 250).runAlgorithm();
+                arr[1] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 500).runAlgorithm();
+                arr[2] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 750).runAlgorithm();
                 
+                results50.add(arr);
                 System.out.println("uf50-" + i + " complete..");
             }
 
@@ -56,15 +71,29 @@ public class AIProject2 {
             files = (new File("uf20")).listFiles();
             for (int i = 0; i < 100; i++) {
                 cl.loadCNFFile(files[i].getPath());
-                results20.add(new SATGeneticAlgorithm(cl, POPULATION_SIZE).runAlgorithm());
+
+                AlgorithmResult[] arr = new AlgorithmResult[3];
+                arr[0] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 250).runAlgorithm();
+                arr[1] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 500).runAlgorithm();
+                arr[2] = new SATGeneticAlgorithm(cl, POPULATION_SIZE, 750).runAlgorithm();
                 
+                results20.add(arr);
                 System.out.println("uf20-" + i + " complete..");
             }
 
-            List<AlgorithmResult>[] arr = new List[] { results100, results75, results50, results20 };
+            List<AlgorithmResult[]>[] arr = new List[] { results100, results75, results50, results20 };
+            
+            String[] rowKeys = new String[] { "250ms", "500ms", "750ms" };
             String[] columnKeys = new String[] { "UF-100", "UF-75", "UF-50", "UF-20" };
             
-            BarChart bc = new BarChart("SAT Genetic Algorithm - Results from 100 Benchmarks", arr, columnKeys);
+            BarChart bc = new BarChart("SAT Genetic Algorithm - Results from 100 Benchmarks", arr);
+            bc.createSuccessChart("SAT Genetic Algorithm - Average Success %", columnKeys, rowKeys);
+            
+            bc = new BarChart("SAT Genetic Algorithm - Results from 100 Benchmarks", arr);
+            bc.createMedianTimeChart("SAT Genetic Algorithm - Median Elapsed Time", columnKeys, rowKeys);
+            
+            bc = new BarChart("SAT Genetic Algorithm - Results from 100 Benchmarks", arr);
+            bc.createBitflipChart("SAT Genetic Algorithm - Average Number of Bit Flips", columnKeys, rowKeys);
             
         } catch (IOException e) {
             e.printStackTrace();

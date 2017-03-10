@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class SATGeneticAlgorithm {
 
-    private final int ALOTTED_TIME = 1000;
-
+    private int alottedTime;
+    
     private ClauseList clauseList;
 
     private Chromosome[] population;
@@ -16,7 +16,8 @@ public class SATGeneticAlgorithm {
     
     private boolean timeExpired;
 
-    public SATGeneticAlgorithm(ClauseList clauseList, int populationSize) {
+    public SATGeneticAlgorithm(ClauseList clauseList, int populationSize, int alottedTime) {
+        this.alottedTime = alottedTime;
         this.timeExpired = false;
         this.clauseList = clauseList;
         this.random = new Random();
@@ -37,7 +38,7 @@ public class SATGeneticAlgorithm {
                 timer.cancel();
                 timer.purge();
             }
-          }, ALOTTED_TIME);
+          }, alottedTime);
         
         int totalFlipped = 0;
         long start = System.nanoTime();
