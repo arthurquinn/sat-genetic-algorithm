@@ -12,9 +12,9 @@ public class AIProject2 {
 			cl.loadCNFFile("uf20\\uf20-01.cnf");
 			
 			
-			SATGeneticAlgorithm satAlg = new SATGeneticAlgorithm(cl, 10);
+			SATGeneticAlgorithm sa = new SATGeneticAlgorithm(cl, 10);
 			
-			satAlg.runAlgorithm();
+			sa.runAlgorithm();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
