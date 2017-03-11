@@ -15,8 +15,26 @@
 \begin{document}
 	
 	\section*{Problem 1}
+
+	In this problem we were asked to use a genetic algorithm to determine a satisfiable solution for various 3-CNF statements. Each statement was contained in its own file. We tested our algorithm on 100 different benchmarks (files) for 20, 50, 75, and 100 variable 3-CNF problems. The algorithm was allowed to run three times for each benchmark each time with a 250ms, 500ms, and 750ms time limit respectively. If an algorithm ran to its alotted time limit it was said to be a failure and was terminated.
+
+	\begin{center}
+		\includegraphics[scale=0.35]{median_time}
+	\end{center}
 	
+	\textbf{Median Elapsed Time:} Above is a graph displaying the results of our benchmark evaluations in terms of the median elapsed time. The most interesting result here occured in our UF-100 tests. For the 250ms time limit and 500ms time limit tests the average median time was 250ms and 500ms respectively. Clearly, this means that none were allowed to run to completion and failed to find a satisfiable solution in their time limits. With a 750ms time alottment however, the average runtime was about 580ms implying many, but not all, ran to completion.
 	
+	As a trend, the fewer variables a problem had, the less runtime it required. 20 variable problems required median runtimes of less than 5ms on average. 50 variable problems required median runtimes of less than 25ms on average. Based on the results of our benchmark evaluations it seems as though the trend may be that as the number of variables increases the median runtime increases exponentially. This is hard to see in the UF-100 column as the times were explicitly limited to 250 and 500ms and thus solution to completion cannot accurately be described. More benchmark evaluations would be required to prove definitively that this is the relationhip.
+	
+	\begin{center}
+		\includegraphics[scale=0.35]{average_bitflips}
+	\end{center}
+	
+	\textbf{Average Number of Bit Flips:} 
+	
+	\begin{center}
+		\includegraphics[scale=0.35]{average_success}
+	\end{center}
 	
 	\section*{Problem 2}
 	
