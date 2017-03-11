@@ -6,6 +6,7 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{enumerate}
+\usepackage{float}
 
 \makeatletter
 \def\BState{\State\hskip-\ALG@thistlm}
@@ -80,13 +81,21 @@
 			\item The resulting state is the successor
 		\end{enumerate}
 		
-		\textbf{}
+		\textbf{Goal Test:} A state is considered to a valid goal state if it is both consistent and complete.
+		
+		\textbf{Path Cost Function:} The path cost from any one state to its successor state will be 1.
 		
 		\item 
 
+		Sudoku problems that are easy compared to ones that are hard can be determined based on the relative usefulness of applying the minimum remaining values heuristic to their search states. 
+		
+		Consider a Sudoku board for which there are an equal number of remaining values for each variable based on their constraints. Here, the heuristic will not be of much use to us since it will not help us narrow our search and we will have to backtrack from many more states to find a satisfiable goal state than if we were faced with an easier Sudoku board.
+		
+		An easier Sudoku board can be defined as one for which there is a varied range of minimum remaining values for each variable. This will be an easier game because the minimum remaining values heuristic will direct us to expand states with the least minimum remaining values first. Since the distribution of minimum remaining values for an easy board is more varied, there will always be a good estimate of what state to expand next and this will lead us more directly to the goal state.
+
 		\item Pseudocode for Local Search
 
-		\begin{algorithm}
+		\begin{algorithm}[H]
 			\caption{Sudoku Local Search Algorithm}\label{euclid}
 			\begin{algorithmic}[1]
 				\Procedure{SudokuSolver}{$\text{Board}$ $\textit{board}$}
@@ -100,10 +109,15 @@
 				\State $\text{return }\textit{board}$
 				\EndProcedure
 			\end{algorithmic}
-		\end{algorithm}
+		\end{algorithm} 
+	
+		Due to its random nature this problem will perform worse on easier problems and better on hard problems than its incremental formulation counterpart.
+		
+		When local search using incremental formulation is used with a good heuristic it will be able to solve easier problems much faster because the heuristic will be very good at directing the search to the goal state. Compared to complete state formulation, which randomizes one variable in a complete state as a successor state, the incremental method will be much more directed and be able to find a solution much faster. Whereas because of the randomness of complete state it will most likely take longer to find a solution.
+		
+		With harder Sudoku problems however, the incremental formulation will not find a solution as fast as the complete state formulation. The heuristic that the incremental formulation uses will not be very useful for hard problems because it will still have to search a lot of the search tree to make up for what cannot be informed by the heuristic. The complete state formulation however, since it changes states randomly, will not have this problem, and will probabilistically complete the algorithm in faster time than the incremental formulation.
 		
 	\end{enumerate}
-	
     
 	\section*{Problem 4}
 	For Superman to be defeated, it has to be that he is facing an opponent alone and his opponent is carrying Kryptonite. Acquiring Kryptonite, however, means that Batman has to coordinate with Lex Luthor and acquire it from him. If, however, Batman coordinates with Lex Luthor, this upsets Wonder Woman, who will intervene and fight on the side of Superman.
