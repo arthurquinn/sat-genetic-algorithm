@@ -41,7 +41,7 @@
 		\includegraphics[scale=0.35]{average_success}
 	\end{center}
 	
-	\testbf{Success Percentage:} Above is a chart displaying the percentage across all of our benchmarks that a satisfiable solution for the 3-CNF problem was found.For our UF-20 and UF-50 benchmark evaluations, for all given time limits (250ms, 500ms, and 750ms) every benchmarks that was ran was able to find a satisfiable solution.
+	\textbf{Success Percentage:} Above is a chart displaying the percentage across all of our benchmarks that a satisfiable solution for the 3-CNF problem was found.For our UF-20 and UF-50 benchmark evaluations, for all given time limits (250ms, 500ms, and 750ms) every benchmarks that was ran was able to find a satisfiable solution.
 	
 	As the number of variables in the problem increased however we see that more runs began to reach their time limits. For our UF-75 tests, more than 90\% of benchmark evaluations were able to find a satisfiable solution with both a 750ms and 500ms time limit. However, decreasing the time limit to 250ms we began to see our first real drop in percentage successful down to 78\%.
 	
@@ -49,14 +49,12 @@
 	
 	\section*{Problem 2}
 	
-	\begin{itemize}
+	\begin{enumerate}[A.]
 		\item
-		A. 
 		\begin{center}
 			\includegraphics[scale=0.5]{Minimax}
 		\end{center}
 		\item
-		B. 
 		\begin{center}
 			\includegraphics[scale=0.5]{Pruning}
 		\end{center}
@@ -64,16 +62,24 @@
 		We cut off the subtree at node K since node B is a MIN and will only accept a value less than 8 we know that we wont get a value greater than 6 down said subtree. The same also occurs below node I. The terminal node 15 is pruned because node D will accept any number greater than 8 however, node I is a MIN and the left terminal node being 5 allows us to denote that the right terminal node cannot be less than 5.
 		
 		\item 
-		C. The max player will choose 17 at the root state by using the exhaustive Minimax Algorithm. The same result will occur when using alpha-beta pruning
+		The max player will choose 17 at the root state by using the exhaustive Minimax Algorithm. The same result will occur when using alpha-beta pruning
 		and the max player will again choose 17. The most optimal move is guaranteed using either the exhaustive Minimax algorithm or the alpha-beta pruning algorithm. This is accomplished by alpha-beta pruning ignoring subtrees that are irrelevant while exhaustive Minimax algorithm checks every node regardless of relevance. The outcome is the same however, since alpha-beta pruning ignores irrelevant subtrees it is more efficient.
 		
 		\item
-		D. 
 		
 		\item
-		E. 
-	\end{itemize}
-	\clearpage
+		
+		Considering a similar variation of the game where each minimize evaluation has a 50\% chance of selecting either the left action or the right action. We simulated this chance with a simple coin flipped and the end result at the root was 90.
+		
+		You cannot apply alpha-beta pruning in this example because the process is dependent on being able to see which action a player will choose. With the element of randomness added to the minimization functions, it becomes impossible for the algorithm to successfully foresee which action a player will choose thus making it unable to prune any subtrees or nodes.
+		
+		\begin{center}
+			\includegraphics[scale=0.75]{RandomMinimax}
+		\end{center}
+		
+	\end{enumerate}
+
+
 	\section*{Problem 3}
 
 	
@@ -149,23 +155,69 @@
 	\end{enumerate}
     
 	\section*{Problem 4}
-	For Superman to be defeated, it has to be that he is facing an opponent alone and his opponent is carrying Kryptonite. Acquiring Kryptonite, however, means that Batman has to coordinate with Lex Luthor and acquire it from him. If, however, Batman coordinates with Lex Luthor, this upsets Wonder Woman, who will intervene and fight on the side of Superman.
-	\begin{itemize}
+	
+	\textit{For Superman to be defeated, it has to be that he is facing an opponent alone and his opponent is carrying Kryptonite. Acquiring Kryptonite, however, means that Batman has to coordinate with Lex Luthor and acquire it from him. If, however, Batman coordinates with Lex Luthor, this upsets Wonder Woman, who will intervene and fight on the side of Superman.}\\
+	
+	
+	$S = \text{Superman Defeated}$
+	
+	$A = \text{Facing Opponent Alone}$	
+	
+	$K = \text{Opponent Carrying Kryptonite}$
+	
+	$B = \text{Batman Coordinates with Lex Luthor}$
+	
+	$W = \text{Wonder Woman Upset}$
+
+	\begin{enumerate}[A.]	
 	\item
-	A.
 	
-	Superman defeated = S
+	$S \implies A \land K$
 	
-	Facing Opponent Alone = A
+	$K \implies B$
 	
-	Opponent carrying Kryptonite = K
+	$B \implies W$
 	
-	Batman coordinates with Lex Luther = B
-	
-	Wonder Woman Upset = W
+	$W \implies \neg A$
 	
 	\item
-	B. Superman being defeated implies that not only did his opponent have Kryptonite but that Superman was also fighting alone. This is equivalent to Superman not being defeated or his opponent has Kryponite and Superman is fighting alone. This all equates to: 
+	
+	$S \implies A \land K \equiv \neg S \lor (A \land K) \equiv (\neg S \land A) \lor (\neg S \land K)$
+	
+	$K \implies B \equiv \neg K \lor B$
+	
+	$B \implies W \equiv \neg B \lor W$
+	
+	$W \implies \neg A \equiv \neg W \lor \neg A$
+	
+	
+	
+	
+	\begin{center}
+		$KB = (\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
+		
+		$\alpha = \neg S$
+	\end{center}
+	
+	\begin{center}
+		$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
+		
+		$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
+		
+		$\therefore$ KB $|=$ $\neg S$
+	\end{center}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	Superman being defeated implies that not only did his opponent have Kryptonite but that Superman was also fighting alone. This is equivalent to Superman not being defeated or his opponent has Kryponite and Superman is fighting alone. This all equates to: 
 	\begin{center}
 		$(\neg S \lor K) \land (\neg S \lor A)$
 	\end{center}
@@ -174,7 +226,7 @@
 	\begin{center}
 		$(\neg K \lor B)$
 	\end{center}
-	Batman coordinating with Lex Luther implies that Wonder Woman will be upset and will team up with Superman. 
+	Batman coordinating with Lex Luthor implies that Wonder Woman will be upset and will team up with Superman. 
 	\begin{center}
 		$(\neg B \lor W)$
 	\end{center}
@@ -183,19 +235,23 @@
 		$(\neg W \lor \neg A)$
 	\end{center}
 	\item
-	C. Based off the knowledge presented above we can prove that Batman cannot defeat Superman. 
 	
-	\begin{center}
-		$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
+	Based off the knowledge presented above we can prove that Batman cannot defeat Superman. 
+	
+	
+	%Based off the knowledge presented above we can prove that Batman cannot defeat Superman. 
+	
+	%\begin{center}
+	%	$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
 		
-		$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
+	%	$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
 		
-		$\neg S$
-	\end{center}
+	%	$\neg S$
+	%\end{center}
 
 	
 	
-	\end{itemize}
+	\end{enumerate}
 	
 	\section*{Problem 5}
 	\begin{itemize}
