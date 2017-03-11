@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.8)  11 MAR 2017 04:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.8)  11 MAR 2017 04:52
 entering extended mode
 **./document.tex
 (document.tex
@@ -178,22 +178,31 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\enumerate.sty"
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks24
-) (document.aux)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (document.aux)
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count112
@@ -284,13 +293,13 @@ G,.JBIG2,.JB2,.eps]
 <median_time.png, id=1, 803.0pt x 602.25pt>
 File: median_time.png Graphic file (type png)
  <use median_time.png>
-Package pdftex.def Info: median_time.png used on input line 22.
+Package pdftex.def Info: median_time.png used on input line 23.
 (pdftex.def)             Requested size: 281.05421pt x 210.79065pt.
 
 <average_bitflips.png, id=3, 803.0pt x 602.25pt>
 File: average_bitflips.png Graphic file (type png)
  <use average_bitflips.png>
-Package pdftex.def Info: average_bitflips.png used on input line 30.
+Package pdftex.def Info: average_bitflips.png used on input line 31.
 (pdftex.def)             Requested size: 281.05421pt x 210.79065pt.
 
 [1
@@ -299,66 +308,90 @@ Package pdftex.def Info: average_bitflips.png used on input line 30.
 <average_success.png, id=12, 803.0pt x 602.25pt>
 File: average_success.png Graphic file (type png)
  <use average_success.png>
-Package pdftex.def Info: average_success.png used on input line 36.
+Package pdftex.def Info: average_success.png used on input line 41.
 (pdftex.def)             Requested size: 281.05421pt x 210.79065pt.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 43.
+
+! Undefined control sequence.
+l.44 	\testbf
+             {Success Percentage:} Above is a chart displaying the percentag...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[2 <./average_bitflips.png> <./average_success.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
 
-<Minimax.png, id=13, 520.19344pt x 294.34969pt>
+<Minimax.png, id=18, 520.19344pt x 294.34969pt>
 File: Minimax.png Graphic file (type png)
  <use Minimax.png>
-Package pdftex.def Info: Minimax.png used on input line 45.
+Package pdftex.def Info: Minimax.png used on input line 56.
 (pdftex.def)             Requested size: 260.09607pt x 147.17447pt.
- [2 <./average_bitflips.png> <./average_success.png>]
-<Pruning.png, id=20, 520.19344pt x 294.34969pt>
+
+<Pruning.png, id=19, 520.19344pt x 294.34969pt>
 File: Pruning.png Graphic file (type png)
  <use Pruning.png>
-Package pdftex.def Info: Pruning.png used on input line 50.
+Package pdftex.def Info: Pruning.png used on input line 61.
 (pdftex.def)             Requested size: 260.09607pt x 147.17447pt.
- [3 <./Minimax.png> <./Pruning.png>]
-Overfull \hbox (10.52052pt too wide) in paragraph at lines 73--74
+ [3 <./Minimax.png> <./Pruning.png>] [4]
+LaTeX Font Info:    Try loading font information for U+msa on input line 84.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 84.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Overfull \hbox (10.52052pt too wide) in paragraph at lines 84--85
 []\OT1/cmr/bx/n/10 Variables: \OT1/cmr/m/n/10 De-fined as $\OML/cmm/m/it/10 n[]
 $ \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 2 []$ \OT1/cmr/m/n
 /10 and $\OML/cmm/m/it/10 j \OMS/cmsy/m/n/10 2 []$
  []
 
-<sudoku_startstate.png, id=24, 280.79906pt x 282.30469pt>
+<sudoku_startstate.png, id=27, 280.79906pt x 282.30469pt>
 File: sudoku_startstate.png Graphic file (type png)
 
 <use sudoku_startstate.png>
-Package pdftex.def Info: sudoku_startstate.png used on input line 91.
+Package pdftex.def Info: sudoku_startstate.png used on input line 102.
 (pdftex.def)             Requested size: 112.31763pt x 112.91986pt.
- [4
+ [5
 
- <./sudoku_startstate.png>] [5] [6] [7]
-(document.aux) ) 
+ <./sudoku_startstate.png>] [6] [7] [8]
+(document.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3250 strings out of 493335
- 44815 string characters out of 3139258
- 119368 words of memory out of 3000000
- 6736 multiletter control sequences out of 15000+200000
- 6651 words of font info for 24 fonts, out of 3000000 for 9000
+ 3535 strings out of 493335
+ 47945 string characters out of 3139258
+ 119855 words of memory out of 3000000
+ 7002 multiletter control sequences out of 15000+200000
+ 7896 words of font info for 30 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,5n,31p,674b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
-x10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-msy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb
->
-Output written on document.pdf (7 pages, 387435 bytes).
+ 38i,5n,31p,682b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on document.pdf (8 pages, 388660 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
+ 84 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

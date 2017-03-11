@@ -7,6 +7,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{enumerate}
 \usepackage{float}
+\usepackage{amssymb}
 
 \makeatletter
 \def\BState{\State\hskip-\ALG@thistlm}
@@ -16,7 +17,7 @@
 	
 	\section*{Problem 1}
 
-	In this problem we were asked to use a genetic algorithm to determine a satisfiable solution for various 3-CNF statements. Each statement was contained in its own file. We tested our algorithm on 100 different benchmarks (files) for 20, 50, 75, and 100 variable 3-CNF problems. The algorithm was allowed to run three times for each benchmark each time with a 250ms, 500ms, and 750ms time limit respectively. If an algorithm ran to its alotted time limit it was said to be a failure and was terminated.
+	In this problem we were asked to use a genetic algorithm to determine a satisfiable solution for various 3-CNF statements. All of these 3-CNF statements used as benchmarks were satisfiable, our benchmarks only determine if a satisfiable solution can be found with certain time limits. Each statement was contained in its own file. We tested our algorithm on 100 different benchmarks (files) for 20, 50, 75, and 100 variable 3-CNF problems. The algorithm was allowed to run three times for each benchmark each time with a 250ms, 500ms, and 750ms time limit respectively. If an algorithm ran to its alotted time limit it was said to be a failure and was terminated.
 
 	\begin{center}
 		\includegraphics[scale=0.35]{median_time}
@@ -30,11 +31,21 @@
 		\includegraphics[scale=0.35]{average_bitflips}
 	\end{center}
 	
-	\textbf{Average Number of Bit Flips:} 
+	\textbf{Average Number of Bit Flips:} Above is the average number of bit flips the algorithm used during the flip heuristic segment of its code for each of our benchmarks. Clearly, the more variables a problem had, the more bitflips it required during execution of the algorithm. 
+	
+	For UF-100 and UF-75, tests with lower time limits yielded on average less bitflips. This is due to the fact that many of these runs did not run until they found a satisfiable state, but were instead cut off by their time limites. This effect is noticable when compared with our UF-50 and UF-20 runs which did not have a correlation between time limit and average bitflips. 
+	
+	In general, as the number of variables in the problem increased the number of bitflips that were required to find a satisfiable solution (or until time ran out) greatly increased.
 	
 	\begin{center}
 		\includegraphics[scale=0.35]{average_success}
 	\end{center}
+	
+	\testbf{Success Percentage:} Above is a chart displaying the percentage across all of our benchmarks that a satisfiable solution for the 3-CNF problem was found.For our UF-20 and UF-50 benchmark evaluations, for all given time limits (250ms, 500ms, and 750ms) every benchmarks that was ran was able to find a satisfiable solution.
+	
+	As the number of variables in the problem increased however we see that more runs began to reach their time limits. For our UF-75 tests, more than 90\% of benchmark evaluations were able to find a satisfiable solution with both a 750ms and 500ms time limit. However, decreasing the time limit to 250ms we began to see our first real drop in percentage successful down to 78\%.
+	
+	The success rate was worse for our 100 variable benchmarks tests. Naturally, as we reduced the alotted time, less of these runs were able to find a satisfiable solution. Our worst success rate was for UF-100 with an alotted time of 250ms. Here, only 36\% of all runs managed to find a satisfiable solution before the time limit. Clearly the results of this section show that as the number of variables in the 3-CNF problem increases, the more time is necessary for the algorithm to find a satisfiable solution.
 	
 	\section*{Problem 2}
 	
