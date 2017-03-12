@@ -96,7 +96,7 @@
 			\includegraphics[scale=0.5]{alphabeta_elim2}
 		\end{center}
 		
-		Clearly, using the information provided by the heuristic values, the minimax algorithm using alpha-beta pruning will find than it can eliminate more nodes that its uninformed counterpart and still find an optimal solution.
+		Clearly, using the information provided by the heuristic values, the minimax algorithm using alpha-beta pruning will find that it can eliminate more nodes that its uninformed counterpart and still find an optimal solution.
 		
 		\item
 		
@@ -264,14 +264,50 @@
 		
 		We stored the initial randomized complete state path as an array of City objects of size $\textit{numCities} + 1$ with the first element in the array being the start city and the last element in the array being the goal city. Both of these cities were the first city in the data file (this would be the travelling salesman's start point and end point). 
 		
-		During each randomization of a new state we randomly flipped two cities in the path (that were not the start or goal city) and returned that new state to our algorithm.
+		During each randomization of a new state we randomly flipped two cities in the path (that were not the start or goal city) and returned that new state to our algorithm. This method will make sure that the next state is both a complete state and does not change the travelling salesman's start or end points.
+		
+		Based on the parameters of the simulated annealing algorithm this new state is either accepted because it improves upon the previous state, or with probability $e^{\frac{\Delta\textit{currentFitness - nextFitness}}{\textit{temperature}}}$. This process is repeated and the temperature is lowered based on the cooling rate. Once the temperature reaches below 1 the algorithm is considered complete and the path found is returned.
+		
+		Using simulated annealing we were able to find a solution for each set of cities however if we set the cooling rate too low we would easily run out of memory (this happened at about a cooling rate on the order of $10^{-6}$).
+		
+		Below is the chart for the average solution time for each benchmark set of cities using a temperature of 10,000 and a cooling rate of 0.003.
+		
+		\begin{center}
+			\includegraphics[scale=0.5]{averagetimes_temp10000_coolingrate003}
+		\end{center}
+		
+		Generally as the number of cities included in the problem increased the time it took to find a solution also increased.
+		
+		Below is the number of nodes generated across all benchmark evaluations:
+		
+		\begin{center}
+			\includegraphics[scale=0.5]{nodesgen_temp10000_coolingrate003}
+		\end{center}
+		
+		Overall the number of nodes expanded seemed to be relatively constant across each of the benchmark evaluations. This is mostly because it doesn't really matter how large the cities are for simulated annealing in this regard. Each successive state still only flips two cities on the path so regardless of how large the city-groups are finding the next successive state is very similar.
+		
+		\begin{center}
+			\includegraphics[scale=0.5]{pathcost}
+		\end{center}
+		
+		Above is an example of the path cost for each of our 25 city benchmark evaluations during each iteration of the simulated annealing algorithm. In the beginning iterations, when the temperature is very high there are bery steep drops in path cost. This is because the algorithm is more likely at this point to take random walks then to only select better states. This can either increase or decrease the total path cost but has the potential to take the solution across a plateau or over a local extrema. Towards the end of execution we see that the path costs begin to level off as the algorithm is less likely to accept worse states and only chooses states that improve the current state. Since at this point the current state is very close to its final solution it is likely that we no longer have to worry about plateaus and local extrema (since the random walks mixed with hill-climbing in the simulated annealing algorithm would get us around these probabilistically) the algorithm slowly hill-climbs to the probabilistic complete solution.
+		
+		\item 
+		
+		Simulated annealing is a useful technique for problems that contain a lot of plateaus and local extrema in the evaluation of their objective functions. Consider the problems associated with hill-climbing in these scenarios. The hill-climbing methods will get 'stuck' in a local extrema or not be able to traverse a plateau without random walks. This leads to sub-optimal solutions unless we randomly restart hill-climbing which is inefficient. 
+		
+		Whereas hill-climbing offers no real solution to these issues, simulated annealing is an elegant probabilistically complete solution that tackles these issues in a balanced way. In the beginning the algorithm is very likely to accept successor states with low objective function evaluations than its current state. This means that there will be more random walks in the beginning of simulated annealing which will allow local extrema to be overcome.
+		
+		This lenient acceptance of "worse" states slowly tapers off as the temperature decreases until we move into the more hill-climbing stage that only accepts better solutions. Because of the randomness of this method it is only probabilistically complete but compared to hill-climbing in problems with many local extrema it is almost certainly guaranteed to perform better in finding a better solution.
+		
+		It is implicit in the design of simulated annealing that the value of the objective function has many local extrema that need to be overcame which would cause algorithms like hill-climbing to fail to find a useful solution. The leniency in accepting a new state in the beginning of the algorithm allows us to overcome these issues. However if these issues are not present then simulated annealing is a worse alternative as compared to hill climbing because it will accept worse states whereas hill-climbing would guide us directly to the optimal solution.
 		
 	\end{enumerate}
 	
 	\section*{Problem 6}
-	\begin{itemize}
+	\begin{enumerate}[A.]
 		\item
-		A. Using the minimum value of $h_1(n)$ and $h_2(n)$ for each state:
+		Using the minimum value of $h_1(n)$ and $h_2(n)$ for each state:
 		
 		\begin{center}
 			Given that $h_1(n) \leq h^*(n)$ is always true, 
@@ -285,7 +321,7 @@
 		\end{center}
 		
 		\item
-		B. Using the maximum value of $h_1(n)$ and $h_2(n)$ for each state:
+		Using the maximum value of $h_1(n)$ and $h_2(n)$ for each state:
 		
 		\begin{center}
 			
@@ -303,7 +339,7 @@
 		
 		
 		\item
-		C. The defined heuristic function 
+		The defined heuristic function 
 		\begin{center}
 			$h_3(n) = w \times h_1(n) + (1-w)h_2(n),$ where $0 \leq w \leq 1$
 		\end{center}
@@ -316,7 +352,7 @@
 		
 		
 		\item
-		D. Considering the informed, best-first search algorithm with an object function of $f(n) = (2-w) \times g(n) + w \times h(n)$. It is guaranteed to work for $0 \leq w \leq 1$ since being multiplied by g(n) which is a constant implies no effect on which order chosen paths are arranged. However, if $w > 1$, then the goal state may have an overestimated distance which will make the heuristic not admissible and so not optimal.
+		Considering the informed, best-first search algorithm with an object function of $f(n) = (2-w) \times g(n) + w \times h(n)$. It is guaranteed to work for $0 \leq w \leq 1$ since being multiplied by g(n) which is a constant implies no effect on which order chosen paths are arranged. However, if $w > 1$, then the goal state may have an overestimated distance which will make the heuristic not admissible and so not optimal.
 		
 		Given the information above we can assess the function for when the values of w are 0, 1, and 2.
 		
@@ -332,6 +368,6 @@
 		
 		When $w = 2$ it will make $f(n) = 2h(n)$ which causes the algorithm to perform like Greedy Best first search.
 		
-	\end{itemize}
+	\end{enumerate}
 		
 \end{document}

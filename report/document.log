@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.8)  12 MAR 2017 09:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.8)  12 MAR 2017 10:57
 entering extended mode
 **./document.tex
 (document.tex
@@ -386,31 +386,69 @@ Overfull \hbox (4.36089pt too wide) in paragraph at lines 265--266
 n ar-ray of City ob-jects of size $[] +
  []
 
-[8] [9] (document.aux) ) 
+[8]
+<averagetimes_temp10000_coolingrate003.png, id=54, 853.1875pt x 612.2875pt>
+File: averagetimes_temp10000_coolingrate003.png Graphic file (type png)
+
+<use averagetimes_temp10000_coolingrate003.png>
+Package pdftex.def Info: averagetimes_temp10000_coolingrate003.png used on inpu
+t line 276.
+(pdftex.def)             Requested size: 426.59271pt x 306.143pt.
+
+Overfull \hbox (8.59773pt too wide) in paragraph at lines 276--277
+ [] 
+ []
+
+<nodesgen_temp10000_coolingrate003.png, id=55, 853.1875pt x 612.2875pt>
+File: nodesgen_temp10000_coolingrate003.png Graphic file (type png)
+
+<use nodesgen_temp10000_coolingrate003.png>
+Package pdftex.def Info: nodesgen_temp10000_coolingrate003.png used on input li
+ne 284.
+(pdftex.def)             Requested size: 426.59271pt x 306.143pt.
+
+Overfull \hbox (8.59773pt too wide) in paragraph at lines 284--285
+ [] 
+ []
+
+[9 <./averagetimes_temp10000_coolingrate003.png>]
+<pathcost.png, id=64, 853.1875pt x 612.2875pt>
+File: pathcost.png Graphic file (type png)
+ <use pathcost.png>
+Package pdftex.def Info: pathcost.png used on input line 290.
+(pdftex.def)             Requested size: 426.59271pt x 306.143pt.
+
+Overfull \hbox (8.59773pt too wide) in paragraph at lines 290--291
+ [] 
+ []
+
+[10 <./nodesgen_temp10000_coolingrate003.png>] [11 <./pathcost.png>] [12]
+(document.aux) ) 
 Here is how much of TeX's memory you used:
- 3550 strings out of 493335
- 48292 string characters out of 3139258
- 119855 words of memory out of 3000000
- 7014 multiletter control sequences out of 15000+200000
+ 3564 strings out of 493335
+ 48785 string characters out of 3139258
+ 120855 words of memory out of 3000000
+ 7025 multiletter control sequences out of 15000+200000
  7896 words of font info for 30 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,5n,31p,973b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-ti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam1
-0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb>
-Output written on document.pdf (9 pages, 676925 bytes).
+ 38i,6n,31p,1065b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
+x10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
+y10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on document.pdf (12 pages, 834694 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
