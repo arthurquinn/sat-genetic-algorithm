@@ -67,15 +67,39 @@
 		
 		\item
 		
-		\item
+		In this version of minimax we are using alpha-beta pruning as well as guiding heuristic values. The heuristic values that were given in the problem  were as follows: $h(D)=9$ $h(E)=7$ $h(F)=24$ $h(G)=16$. 
 		
-		Considering a similar variation of the game where each minimize evaluation has a 50\% chance of selecting either the left action or the right action. We simulated this chance with a simple coin flipped and the end result at the root was 90.
+		Because the heuristic value for node E is lower than the heuristic value for node D, and since their parent node B is a MIN, the subtrees with root D and root E will be swapped. This is because, based on the heuristic values, the algorithm would want to search the subtree of node E first, since B is a minimizer and would would choose the minimal value, it is more likely that we can eliminate nodes that we need to search if we search this subtree first.
 		
-		You cannot apply alpha-beta pruning in this example because the process is dependent on being able to see which action a player will choose. With the element of randomness added to the minimization functions, it becomes impossible for the algorithm to successfully foresee which action a player will choose thus making it unable to prune any subtrees or nodes.
+		The same is true for nodes F ang G. Node G has a lower heuristic value and since their parent node C is a MIN node, it will choose the minimal value of the two children nodes. Since the heuristic is informing us that G is most likely the node with the minimal value, we will expand G first to see if there are any nodes we can possibly eliminate from our search process.
+		
+		Node A is a MAX. Based on the information provided by the heuristic we can determine which subtree, B or C, would be better to search first. Since B is a MIN, and we know that $h(D)=9$ and $h(E)=7$ we can assume that node B would choose node E. The same logic can be applied to see that node C will choose node G. Now we know that based on the heuristic node B has a value of 7 and node C has a value of 16. Since A is a MAX it should expand node C first, so B and C are swapped.
+		
+		The specified swaps are shown below:
 		
 		\begin{center}
-			\includegraphics[scale=0.75]{RandomMinimax}
+			\includegraphics[scale=0.5]{alphabeta_swaps}
 		\end{center}
+		
+		After these swaps are made the minimax algorithm with alpha-beta pruning will run in its normal operation and find that the following nodes will not need to be expanded:
+		
+		\begin{center}
+			\includegraphics[scale=0.5]{alphabeta_elim2}
+		\end{center}
+		
+		Clearly, using the information provided by the heuristic values, the minimax algorithm using alpha-beta pruning will find than it can eliminate more nodes that its uninformed counterpart and still find an optimal solution.
+		
+		\item
+		
+		Consider a variation where the MIN player will choose either the left or right child state as its move with a 0.50 probability. Here, the MAX player is uncertain what node to choose because it cannot predict the choice of the MIN player based on the minimum value available to it (as in a typical minimax search tree). However, the MAX player can choose a value in the search tree based on the expected value of the MIN players choice.
+		
+		For example, if a MIN player has available to it a node with a utility value of 5 and a node with a utility value of 15, based on this problem we know that it will choose 5 with probability 0.50 and 15 with probability 0.50. Therefore we can say the expected value of the MIN players choice is 10. For each MIN node, we can say that its expected value is $0.50*\textit{value of left child} + 0.50*\textit{value of right child}$. The MAX player can then maximize its choice by selecting the MIN node with the higher expected value, and in this way we utilize all of the information available to our MAX player to optimize his choice based on the randomness of the MIN player.
+		
+		\begin{center}
+			\includegraphics[scale=0.75]{random_minimax}
+		\end{center}
+		
+		Above is a visualization of the described algorithm where the MIN player stores in its node its expected value from choosing from its two children each with 0.50 probability. The MAX player will then choose the MIN node with the higher expected value.
 		
 	\end{enumerate}
 
@@ -182,7 +206,7 @@
 	
 	\item
 	
-	$S \implies A \land K \equiv \neg S \lor (A \land K) \equiv (\neg S \land A) \lor (\neg S \land K)$
+	$S \implies A \land K \equiv \neg S \lor (A \land K) \equiv (\neg S \lor A) \land (\neg S \lor K)$
 	
 	$K \implies B \equiv \neg K \lor B$
 	
@@ -190,22 +214,21 @@
 	
 	$W \implies \neg A \equiv \neg W \lor \neg A$
 	
+	\item
 	
+	In order to prove that superman cannot be defeated we must use our knowledge base to prove that superman defeated is unsatisfiable.
+
+	$KB = (\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
 	
+	$\alpha = \neg S$
+
+
+	$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
 	
-	\begin{center}
-		$KB = (\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
-		
-		$\alpha = \neg S$
-	\end{center}
+	$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
 	
-	\begin{center}
-		$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
-		
-		$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
-		
-		$\therefore$ KB $|=$ $\neg S$
-	\end{center}
+	$\therefore KB \vDash \neg S$
+
 	
 	
 	
