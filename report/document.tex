@@ -51,19 +51,28 @@
 	
 	\begin{enumerate}[A.]
 		\item
+		
+		Below is the minimax search tree with each intermediate value throughout the operation of the algorithm labelled.
+		
 		\begin{center}
 			\includegraphics[scale=0.5]{Minimax}
 		\end{center}
+		
 		\item
+		
+		Below is a representation of which nodes are not visited throughout operation of the minimax algorithm with alpha-beta pruning and the final alpha/beta values at each intermediate node throughout its operation labelled.
+		
 		\begin{center}
-			\includegraphics[scale=0.5]{Pruning}
+			\includegraphics[scale=0.5]{alphabeta}
 		\end{center}
 		
-		We cut off the subtree at node K since node B is a MIN and will only accept a value less than 8 we know that we wont get a value greater than 6 down said subtree. The same also occurs below node I. The terminal node 15 is pruned because node D will accept any number greater than 8 however, node I is a MIN and the left terminal node being 5 allows us to denote that the right terminal node cannot be less than 5.
+		The first node that will not be visited by the minimax algorithm using alpha-beta pruning is the terminal node with value 16 that is the right child of node I. At this point in the operation of the algorithm node D has discovered that it can choose a value of 8 from node H. This means that the range of values node D will possibly choose are $[8, \infty]$ (since D is a MAX node and will not accept anything less than 8 since it knows it can receive that from H). When we visit the left child of node I we know that the range of values node I will accept is $[-\infty, 5]$ (since node I is a MIN and will not choose anything larger than the 5 it knows it can get from its left child). Since node I will offer a maxmium value of 5 to node D, we do not need to visit node I's right child because node D as a MAX node will already know that choosing the value at node H is preferable.
+		
+		The second node that will not be visisted by the minimax algorithm with alpha-beta pruning is the right child of node K. Assume we are at the step where the MIN at node B knows it can get a value of 8 from node D. After node J's children are visited node E knows that it can get a value of 6 from node J. This means node E's value will be $\ge 6$. The MIN at node B knows that it can possibly get less from node E than it can from D, so node E's right subtree is visisted. Once the MIN at node K knows it will return a maximum value of 6, the MAX at node E knows it should choose the 6 from node J. Thus the MAX player at node E can safely choose node J without ever visiting the right terminal child of K.
 		
 		\item 
-		The max player will choose 17 at the root state by using the exhaustive Minimax Algorithm. The same result will occur when using alpha-beta pruning
-		and the max player will again choose 17. The most optimal move is guaranteed using either the exhaustive Minimax algorithm or the alpha-beta pruning algorithm. This is accomplished by alpha-beta pruning ignoring subtrees that are irrelevant while exhaustive Minimax algorithm checks every node regardless of relevance. The outcome is the same however, since alpha-beta pruning ignores irrelevant subtrees it is more efficient.
+		
+		According to the exhaustive minimax algorithm the MAX player will choose 17 at the root state. According to the minimax algorithm employing alpga-beta pruning the MAX player will again choose 17 at the root state. In general the best move computed by the two algorithms is guaranteed to be the same. This is due to the fact that exhaustive minimax and minimax employing alpha-beta pruning employ the same logic at each state. It is simply that employing alpha-beta pruning reduces the number of computations required by the algorithm, it does not change the underlying logic. Therefore both algorithms will yield the same best move to the MAX player at the root state, but minimax employing alpha-beta pruning will visit less nodes to come to this conclusion and therefore be more efficient.
 		
 		\item
 		
