@@ -226,18 +226,27 @@
 	\item
 	
 	In order to prove that superman cannot be defeated we must use our knowledge base to prove that superman defeated is unsatisfiable.
+	
+	\textbf{Given:} $KB = (\neg S \lor A) \land (\neg S \lor K) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
+	
+	\textbf{Prove:} $KB \vDash \neg S$
+	
+	\textbf{Show:} $KB \land S \text{ is unsatisfiable}$
+	
+	$KB \land S = \underline{(\neg S \lor A)} \land (\neg S \lor K) \land (\neg K \lor B) \land (\neg B \lor W) \land \underline{(\neg W \lor \neg A)} \land S$
+	
+	$KB \land S = \underline{(\neg S \lor \neg W)} \land (\neg S \lor K) \land (\neg K \lor B) \land \underline{(\neg B \lor W)} \land S$
+	
+	$KB \land S = \underline{(\neg S \lor \neg B)} \land (\neg S \lor K) \land \underline{(\neg K \lor B)} \land S$
+	
+	$KB \land S = \underline{(\neg S \lor \neg K)} \land \underline{(\neg S \lor K)} \land S$
+	
+	$KB \land S = (\neg S \lor \neg S) \land S$
+	
+	$KB \land S = \neg S \land S$
+	
+	$KB \land S = \varnothing$
 
-	$KB = (\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
-	
-	$\alpha = \neg S$
-
-
-	$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
-	
-	$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
-	
-	$\therefore KB \vDash \neg S$
-
 	
 	
 	
@@ -249,37 +258,6 @@
 	
 	
 	
-	Superman being defeated implies that not only did his opponent have Kryptonite but that Superman was also fighting alone. This is equivalent to Superman not being defeated or his opponent has Kryponite and Superman is fighting alone. This all equates to: 
-	\begin{center}
-		$(\neg S \lor K) \land (\neg S \lor A)$
-	\end{center}
-	
-	Superman fighting alone implies that Superman was defeated. 
-	\begin{center}
-		$(\neg K \lor B)$
-	\end{center}
-	Batman coordinating with Lex Luthor implies that Wonder Woman will be upset and will team up with Superman. 
-	\begin{center}
-		$(\neg B \lor W)$
-	\end{center}
-	Wonder Woman being upset implies that she will team up with Superman and he will not be fighting alone.
-	\begin{center}
-		$(\neg W \lor \neg A)$
-	\end{center}
-	\item
-	
-	Based off the knowledge presented above we can prove that Batman cannot defeat Superman. 
-	
-	
-	%Based off the knowledge presented above we can prove that Batman cannot defeat Superman. 
-	
-	%\begin{center}
-	%	$(\neg S \lor K) \land (\neg S \lor A) \land (\neg K \lor B) \land (\neg B \lor W) \land (\neg W \lor \neg A)$
-		
-	%	$(\neg S \lor \neg S) \land (\neg A \lor A) \land (\neg K \lor K) \land (\neg B \lor B) \land (\neg W \lor W)$
-		
-	%	$\neg S$
-	%\end{center}
 
 	
 	
