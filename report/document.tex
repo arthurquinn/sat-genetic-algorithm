@@ -246,28 +246,27 @@
 	$KB \land S = \neg S \land S$
 	
 	$KB \land S = \varnothing$
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
+	Above we can see that $KB \land S$ reduces to an empty set and is thus unsatisfiable $\therefore KB \vDash \neg S$. $\blacksquare$
 	
 	\end{enumerate}
 	
 	\section*{Problem 5}
-	\begin{itemize}
+	\begin{enumerate}[A.]
+		
 		\item
-		A.
-	\end{itemize}
+		
+		Travelling Salesman Problem using A* search.
+		
+		\item 
+		
+		For this problem we used the local search method Simulated Annealing to solve the Travelling Salesman Problem.
+		
+		We stored the initial randomized complete state path as an array of City objects of size $\textit{numCities} + 1$ with the first element in the array being the start city and the last element in the array being the goal city. Both of these cities were the first city in the data file (this would be the travelling salesman's start point and end point). 
+		
+		During each randomization of a new state we randomly flipped two cities in the path (that were not the start or goal city) and returned that new state to our algorithm.
+		
+	\end{enumerate}
 	
 	\section*{Problem 6}
 	\begin{itemize}
