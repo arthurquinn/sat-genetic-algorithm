@@ -305,49 +305,77 @@
 	\end{enumerate}
 	
 	\section*{Problem 6}
+	
+	The following problems were considered where $h_1(n)$ and $h_2(n)$ were both admissible heuristics. If this assumption is not made than for all problems A-D the given function will be neither admissible nor consistent. If we assume that $h_1(n)$ and $h_2(n)$ are admissible however then we can infer more about the given functions in the following problems.
+	
 	\begin{enumerate}[A.]
-		\item
-		Using the minimum value of $h_1(n)$ and $h_2(n)$ for each state:
+		\item \textbf{Given:} $min(h_1(n), h_2(n))$
 		
-		\begin{center}
-			Given that $h_1(n) \leq h^*(n)$ is always true, 
-			
-			$Min(h_1(n),$ $\infty) \leq h^*(n)$
+		Since we have assumed that both $h_1(n)$ is admissible and $h_2(n)$ is admissible than it is certain that the lesser of the two values will also be admissible $\therefore min(h_1(n), h_2(n))$ is also admissible.
 		
-			Therefore $h_1(n) = minimum (h_1(n), h_2(n))$ is admissible. 
-			
-			consistent? 
-		
-		\end{center}
 		
 		\item
 		Using the maximum value of $h_1(n)$ and $h_2(n)$ for each state:
 		
-		\begin{center}
 			
-			Given that $h_1(n) \leq h^*(n)$
+		Given that $h_1(n) \leq h^*(n)$
+		
+		$h_2(n) \leq h^*(n)$
+		
+		$Max(h_1(n),$ $h_2(n)) \leq h^*(n)$
+		
+		Therefore $h_4(n) = maximum(h_1(n),$ $h_2(n))$ is admissible.
+		
+		consistent? 
 			
-			$h_2(n) \leq h^*(n)$
-			
-			$Max(h_1(n),$ $h_2(n)) \leq h^*(n)$
-			
-			Therefore $h_4(n) = maximum(h_1(n),$ $h_2(n))$ is admissible.
-			
-			consistent? 
-			
-		\end{center}
 		
 		
-		\item
-		The defined heuristic function 
-		\begin{center}
-			$h_3(n) = w \times h_1(n) + (1-w)h_2(n),$ where $0 \leq w \leq 1$
-		\end{center}
+		\item \textbf{Given:} $h_3(n) = w \times h_1(n) + (1-w)h_2(n),$ where $0 \leq w \leq 1$
 		
-		is admissible only when w is a value less than 0.5, any value larger than 0.5 will cause $h_1(n)$ to be multiplied by a value larger than $h_2(n)$.  Since the the bounds are from 0 to 1 the heuristic is NOT admissible. 
+		Consider the following cases:
+		
+		\begin{itemize}
+			\item
+			
+			$w = 0$ 
+			
+			Here we see that the value of $h_1(n)$ is removed from the equation and $h_2(n)$ is weighted with a value of one.
+			
+			Thus $h_3(n) = h_2(n) \leq h^*(n)$ and the heuristic is admissible.
+			
+			\item
+			
+			$w = 1$
+			
+			Here we see that the value of $h_2(n)$ is removed from the equation and $h_1(n)$ is weighted with a value of one.
+			
+			Thus $h_3(n) = h_1(n) \leq h^*(n)$ and the heuristic is admissible.
+			
+			\item
+			
+			$w = 0.5$
+			
+			Here, we see that both $h_1(n)$ and $h_2(n)$ are scaled by a factor of $\frac{1}{2}$ of their original values.
+			
+			Assuming that both $h_1(n)$ and $h_2(n)$ are admissible, let $max(h_1(n), h_2(n)) = a$.
+			
+			We know that since both $h_1(n)$ and $h_2(n)$ are admissible that a is also admissible.  
+			
+			Whether $h_1(n)$ or $h_2(n)$ is the larger heuristic value is irrelevant since both are admissible, so we can scale the smaller up to $a$.
+			
+			Substituting $a$ in for $h_1(n)$ and $h_2(n)$ and applying the scaling of $w$ and $(w - 1)$ we see that $0.5*a + 0.5*a = a$ and thus the sum is also admissible since $a$ is admissible $\therefore h_3(n)$ is admissible.
+			
+			\item
+			
+			$0 < w < 0.5$
 			
 			
-			consistent? 
+			
+			\item 
+			
+			$0.5 < w < 1$
+			
+		\end{itemize}
 			
 		
 		
